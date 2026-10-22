@@ -27,7 +27,7 @@ All routes are registered under `/api/better-deepseek`:
 | Endpoint | Method | Purpose |
 |---|---|---|
 | `/ping` | GET | Handshake and capability report |
-| `/events` | GET | SSE stream for session and tool events |
+| `/events?sessionId=<id>` | GET | SSE stream filtered to one session; omit `sessionId` to receive all sessions |
 | `/session.create` | POST | Create a Harness agent session with a working directory |
 | `/session.prompt` | POST | Submit a prompt to an existing session |
 | `/session.result` | GET | Poll session status and final assistant text |
