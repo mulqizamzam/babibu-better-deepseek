@@ -35,7 +35,7 @@ All routes are registered under `/api/better-deepseek`:
 
 ## Configuration and security
 
-The Cordis patch enables `enableCors: true` by default to support a local browser-extension client. This sets wildcard `Access-Control-Allow-Origin`; it is not authentication. Run Harness only in a trusted environment, do not expose its web server to untrusted networks, and disable CORS when cross-origin access is not needed.
+The Cordis patch enables `enableCors: true` by default to support a local browser-extension client. This sets wildcard `Access-Control-Allow-Origin`; it is not authentication. SSE streams without a `sessionId` query parameter receive events for all sessions, so clients should request a session filter whenever possible. Run Harness only in a trusted environment, do not expose its web server to untrusted networks, and disable CORS when cross-origin access is not needed.
 
 ## Development
 
