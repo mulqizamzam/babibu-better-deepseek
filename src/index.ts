@@ -23,7 +23,7 @@ export class BetterDeepSeekBridgeService extends Service {
     enableCors: z.boolean().default(true),
   })
 
-  private readonly sseClients = new Set<ServerResponse>()
+  private readonly sseClients = new Map<ServerResponse, string | null>()
   private readonly latestAssistantTextBySession = new Map<string, string>()
 
   constructor(ctx: Context, private readonly config: Config) {
@@ -59,7 +59,7 @@ export class BetterDeepSeekBridgeService extends Service {
               'Connection': 'keep-alive',
             })
             res.write(': connected\n\n')
-            this.sseClients.add(res)
+            this.sseClients.set(res, url.searchParams.get('sessionId'))
 
             req.on('close', () => {
               this.sseClients.delete(res)
@@ -338,7 +338,9 @@ export class BetterDeepSeekBridgeService extends Service {
 
   private broadcast(type: string, payload: unknown): void {
     const data = `data: ${JSON.stringify({ type, timestamp: Date.now(), payload })}\n\n`
-    for (const client of this.sseClients) {
+    for (const [client, sessionFilter] of this.sseClients) {
+      const eventSessionId = (payload as { sessionId?: string } | null)?.sessionId
+      if (sessionFilter && sessionFilter !== eventSessionId) continue
       client.write(data)
     }
   }
