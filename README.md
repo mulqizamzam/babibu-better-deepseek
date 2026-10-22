@@ -39,7 +39,7 @@ The Cordis patch enables `enableCors: true` by default to support a local browse
 
 ## Development
 
-The plugin is written in TypeScript and uses DeepSeek Harness workspace packages. The upstream workspace currently declares several dependencies as `workspace:^`; this port retains the Harness-native package contract. Build and test it within a compatible DSH workspace/release environment.
+The plugin is written in TypeScript and uses DeepSeek Harness workspace packages. The published plugin uses registry-resolvable dependency ranges rather than monorepo-only `workspace:` references, so a Git-hosted install can resolve dependencies outside the Harness source checkout. The runtime peer contract targets `@deepseek-ai/dsh-agent@0.2.1-rc.2` and `@deepseek-ai/cordis@^4.0.5`. Build and test it within a compatible DSH workspace/release environment.
 
 ## Upstream and attribution
 
