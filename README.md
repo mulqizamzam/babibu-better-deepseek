@@ -47,4 +47,4 @@ The plugin is written in TypeScript and uses DeepSeek Harness workspace packages
 - Companion extension: [EdgeTypE/better-deepseek](https://github.com/EdgeTypE/better-deepseek)
 - This is an independent community port and is not affiliated with or endorsed by DeepSeek.
 
-See [LICENSE](LICENSE) for licensing terms.
+The upstream package metadata declares MIT licensing; verify upstream license terms before redistributing modified builds.
